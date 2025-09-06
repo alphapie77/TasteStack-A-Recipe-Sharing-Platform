@@ -73,6 +73,35 @@ class RecipeListCreateView(generics.ListCreateAPIView):
                 pass
         
         return queryset
+    
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            paginated_response = self.get_paginated_response(serializer.data)
+            # Ensure the response has the expected structure
+            response_data = paginated_response.data
+            if 'results' not in response_data:
+                response_data = {
+                    'results': serializer.data,
+                    'count': queryset.count(),
+                    'total_pages': 1
+                }
+            else:
+                # Calculate total pages
+                count = response_data.get('count', 0)
+                page_size = self.paginator.page_size
+                total_pages = (count + page_size - 1) // page_size
+                response_data['total_pages'] = total_pages
+            return Response(response_data)
+        
+        serializer = self.get_serializer(queryset, many=True)
+        return Response({
+            'results': serializer.data,
+            'count': queryset.count(),
+            'total_pages': 1
+        })
     search_fields = ['title', 'description', 'ingredients']
     ordering_fields = ['created_at', 'average_rating']
     ordering = ['-created_at']

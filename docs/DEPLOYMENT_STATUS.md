@@ -87,7 +87,7 @@ DEFAULT_RENDERER_CLASSES = ['rest_framework.renderers.JSONRenderer']
 - **Live Backend:** https://shksabbir7.pythonanywhere.com/
 - **API Root:** https://shksabbir7.pythonanywhere.com/api/
 - **Admin Panel:** https://shksabbir7.pythonanywhere.com/admin/
-- **GitHub Repository:** https://github.com/alphapie77/TasteStack-A-Recipe-Sharing-Platform
+- **GitHub Repository:** https://github.com/alphapie77/TasteStack
 
 ## 📞 Support
 

@@ -37,8 +37,8 @@ TasteStack is a modern recipe sharing platform that allows users to discover, sh
 ### ⚡ Super Quick (Docker)
 ```bash
 # Clone repository
-git clone https://github.com/alphapie77/TasteStack-A-Recipe-Sharing-Platform.git
-cd TasteStack-A-Recipe-Sharing-Platform
+git clone https://github.com/alphapie77/TasteStack.git
+cd TasteStack
 
 # Start with SQLite (simple)
 docker\run-sqlite.bat
@@ -57,8 +57,8 @@ docker\run-postgres.bat
 
 #### Clone Repository
 ```bash
-git clone https://github.com/alphapie77/TasteStack-A-Recipe-Sharing-Platform.git
-cd TasteStack-A-Recipe-Sharing-Platform
+git clone https://github.com/alphapie77/TasteStack.git
+cd TasteStack
 ```
 
 #### Automated Setup
@@ -84,7 +84,7 @@ python manage.py runserver
 
 #### Manual Frontend Setup (React)
 ```bash
-cd frontend
+cd app
 npm install
 # Create .env file with:
 # REACT_APP_API_URL=http://localhost:8000/api
@@ -173,7 +173,8 @@ TasteStack/
 │   ├── interactions/       # Social features (likes, comments)
 │   ├── media/              # User uploaded files
 │   └── requirements.txt    # Python dependencies
-├── 📁 frontend/             # React application
+├── 📁 app/                  # React application (Vercel-ready)
+├── 📁 frontend/             # React application (development)
 │   ├── src/
 │   │   ├── components/     # Reusable UI components
 │   │   ├── pages/          # Page components

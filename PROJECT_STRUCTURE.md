@@ -41,7 +41,8 @@ TasteStack/
 │   ├── docker-entrypoint.sh      # Docker startup script
 │   └── manage.py                  # Django management
 │
-├── 📁 frontend/                   # React application
+├── 📁 app/                        # React application (Vercel-ready)
+├── 📁 frontend/                   # React application (development)
 │   ├── 📁 public/                 # Static assets
 │   │   ├── index.html             # Main HTML template
 │   │   ├── favicon.ico            # Site icon

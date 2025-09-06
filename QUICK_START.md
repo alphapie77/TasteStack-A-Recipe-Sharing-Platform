@@ -34,7 +34,8 @@ scripts\start-dev.bat
 ```
 TasteStack/
 ├── backend/     # Django API
-├── frontend/    # React App
+├── app/         # React App (Vercel)
+├── frontend/    # React App (Dev)
 ├── docker/      # Docker configs
 ├── scripts/     # Automation
 ├── docs/        # Documentation

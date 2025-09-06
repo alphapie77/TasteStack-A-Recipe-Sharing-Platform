@@ -574,12 +574,13 @@ const Navbar = () => {
                           <button
                             onClick={() => {
                               setIsSearchOpen(false);
+                              const currentQuery = searchQuery;
                               setSearchQuery('');
-                              navigate('/recipes');
+                              navigate(`/recipes${currentQuery ? `?search=${encodeURIComponent(currentQuery)}` : ''}`);
                             }}
                             className="w-full text-center text-gray-500 hover:text-gray-700 text-xs font-medium py-1 rounded-md hover:bg-gray-50 transition-colors"
                           >
-                            🔍 Advanced Search
+                            🔍 Advanced Search & Filters
                           </button>
                         </div>
                       </div>
@@ -756,7 +757,7 @@ const Navbar = () => {
                   onClick={closeAllMenus}
                   className="block mt-3 text-center text-violet-600 dark:text-violet-400 text-sm font-medium"
                 >
-                  View All Categories →
+                  View All Categories & Advanced Search →
                 </Link>
               </div>
 

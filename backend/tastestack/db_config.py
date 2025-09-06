@@ -7,7 +7,10 @@ DATABASE_URL for easy deployment.
 """
 
 import os
-import dj_database_url
+try:
+    import dj_database_url
+except ImportError:
+    dj_database_url = None
 from pathlib import Path
 
 
@@ -27,7 +30,7 @@ def get_database_config(base_dir):
     # Check if DATABASE_URL is provided (for easy deployment)
     database_url = os.getenv('DATABASE_URL')
     
-    if database_url:
+    if database_url and dj_database_url:
         # Use DATABASE_URL if provided (overrides individual settings)
         return dj_database_url.parse(database_url)
     
@@ -99,7 +102,7 @@ def get_database_info():
     db_engine = os.getenv('DATABASE_ENGINE', 'sqlite').lower()
     database_url = os.getenv('DATABASE_URL')
     
-    if database_url:
+    if database_url and dj_database_url:
         parsed = dj_database_url.parse(database_url)
         engine_name = parsed['ENGINE'].split('.')[-1]
         return {

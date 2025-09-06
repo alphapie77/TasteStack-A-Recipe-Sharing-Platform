@@ -18,16 +18,22 @@
 ## 1. Project Overview
 
 TasteStack is a recipe sharing platform built with:
-- **Backend**: Django REST Framework
-- **Frontend**: React with Tailwind CSS
+- **Backend**: Django REST Framework ✅ **LIVE**
+- **Frontend**: React with Tailwind CSS 🔄 **PENDING**
 - **Database**: SQLite (development) / PostgreSQL (production)
-- **Authentication**: JWT tokens
-- **Deployment**: Docker
+- **Authentication**: JWT tokens ✅ **WORKING**
+- **Deployment**: PythonAnywhere + Vercel
 
 ### Architecture
 ```
 Frontend (React) ←→ API (Django REST) ←→ Database (SQLite)
+     Vercel           PythonAnywhere        SQLite
 ```
+
+### 🌐 Live Demo
+- **Backend API**: https://shksabbir7.pythonanywhere.com/
+- **Admin Panel**: https://shksabbir7.pythonanywhere.com/admin/
+- **Status**: ✅ Production Ready with 5 sample recipes
 
 ---
 

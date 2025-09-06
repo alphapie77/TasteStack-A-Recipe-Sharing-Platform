@@ -5,8 +5,17 @@
 [![React](https://img.shields.io/badge/React-18.3.1-blue.svg)](https://reactjs.org/)
 [![Django](https://img.shields.io/badge/Django-5.2.1-green.svg)](https://www.djangoproject.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6.2-blue.svg)](https://www.typescriptlang.org/)
+[![Backend Status](https://img.shields.io/badge/Backend-Live-brightgreen.svg)](https://shksabbir7.pythonanywhere.com/)
+[![API Status](https://img.shields.io/badge/API-Working-success.svg)](https://shksabbir7.pythonanywhere.com/api/recipes/)
 
 TasteStack is a modern recipe sharing platform that allows users to discover, share, and interact with recipes from around the world. Built with Django REST Framework backend and React frontend, it provides a seamless experience for food enthusiasts.
+
+## 🌐 Live Demo
+
+- **Backend API:** [https://shksabbir7.pythonanywhere.com/](https://shksabbir7.pythonanywhere.com/)
+- **Admin Panel:** [https://shksabbir7.pythonanywhere.com/admin/](https://shksabbir7.pythonanywhere.com/admin/)
+- **API Documentation:** [View API Endpoints](#-api-endpoints)
+- **Frontend:** *Coming Soon - Deploy to Vercel*
 
 ## ✨ Features
 
@@ -101,6 +110,20 @@ docker\stop-postgres.bat  # Stop
 - Frontend: http://localhost:3000
 - Backend: http://localhost:8000
 
+## 🚀 Production Deployment
+
+### Backend (PythonAnywhere) ✅ LIVE
+- **URL:** https://shksabbir7.pythonanywhere.com/
+- **Status:** Production Ready
+- **Database:** SQLite (5 sample recipes loaded)
+- **Authentication:** JWT tokens working
+- **CORS:** Configured for frontend integration
+
+### Frontend (Vercel) 🔄 Coming Soon
+- **Status:** Ready for deployment
+- **Configuration:** Environment variables prepared
+- **Integration:** API endpoints tested and verified
+
 ## 🖥️ Usage
 
 1. **Access the application:** Open your web browser and go to `http://localhost:3000`
@@ -170,7 +193,8 @@ TasteStack/
 └── README.md               # This file
 ```
 
-📚 **See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) for detailed structure**
+📚 **See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) for detailed structure**  
+📋 **See [DEPLOYMENT_STATUS.md](docs/DEPLOYMENT_STATUS.md) for deployment information**
 
 ## 🔧 Development Commands
 
@@ -208,6 +232,25 @@ npm run eject
 ```
 
 ## 📊 API Endpoints
+
+**Base URL:** `https://shksabbir7.pythonanywhere.com`
+
+### API Authentication Format
+```json
+// Registration
+{
+  "username": "your_username",
+  "email": "your@email.com",
+  "password": "your_password",
+  "password_confirm": "your_password"
+}
+
+// Login (uses email, not username)
+{
+  "email": "your@email.com",
+  "password": "your_password"
+}
+```
 
 ### Authentication
 - `POST /api/auth/register/` - User registration
@@ -247,6 +290,28 @@ npm run eject
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🧪 API Testing
+
+Test the live API endpoints:
+
+```bash
+# Test API status
+curl https://shksabbir7.pythonanywhere.com/
+
+# Get recipes
+curl https://shksabbir7.pythonanywhere.com/api/recipes/
+
+# Register new user
+curl -X POST https://shksabbir7.pythonanywhere.com/api/auth/register/ \
+  -H "Content-Type: application/json" \
+  -d '{"username":"testuser","email":"test@example.com","password":"testpass123","password_confirm":"testpass123"}'
+
+# Login
+curl -X POST https://shksabbir7.pythonanywhere.com/api/auth/login/ \
+  -H "Content-Type: application/json" \
+  -d '{"email":"test@example.com","password":"testpass123"}'
+```
 
 ## 🔥 Advanced Usage
 

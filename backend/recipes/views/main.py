@@ -74,6 +74,10 @@ class RecipeListCreateView(generics.ListCreateAPIView):
         
         return queryset
     
+    search_fields = ['title', 'description', 'ingredients']
+    ordering_fields = ['created_at', 'average_rating']
+    ordering = ['-created_at']
+    
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
         page = self.paginate_queryset(queryset)
@@ -102,9 +106,6 @@ class RecipeListCreateView(generics.ListCreateAPIView):
             'count': queryset.count(),
             'total_pages': 1
         })
-    search_fields = ['title', 'description', 'ingredients']
-    ordering_fields = ['created_at', 'average_rating']
-    ordering = ['-created_at']
     
     def get_serializer_class(self):
         if self.request.method == 'POST':

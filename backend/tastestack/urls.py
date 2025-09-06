@@ -3,9 +3,24 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from django.http import JsonResponse
 from .media_debug import list_media_files
 
+def api_root(request):
+    return JsonResponse({
+        'message': 'TasteStack API is running',
+        'version': '1.0.0',
+        'endpoints': {
+            'admin': '/admin/',
+            'auth': '/api/auth/',
+            'recipes': '/api/recipes/',
+            'interactions': '/api/interactions/',
+            'token': '/api/token/',
+        }
+    })
+
 urlpatterns = [
+    path('', api_root, name='api_root'),
     path('admin/', admin.site.urls),
     path('api/auth/', include('accounts.urls')),
     path('api/recipes/', include('recipes.urls')),

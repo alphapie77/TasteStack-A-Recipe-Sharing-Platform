@@ -3,13 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
 import { simpleSearchRecipes } from '../services/recipeService';
-import { 
-  validateSearchQuery, 
-  sanitizeSearchInput, 
-  searchRateLimiter, 
-  createDebouncer,
-  searchHistory 
-} from '../utils/validation';
+// Removed complex validation imports for simplified search
 import './Navbar.css';
 
 const Navbar = () => {
@@ -106,11 +100,8 @@ const Navbar = () => {
       return;
     }
     
-    // Don't search if query hasn't changed
-    if (query === lastSearchQuery && !searchError) {
-      setIsSearchOpen(searchResults.length > 0);
-      return;
-    }
+    // Always show dropdown when typing
+    setIsSearchOpen(true);
     
     // Set up debounced search
     debounceTimeoutRef.current = setTimeout(() => {
@@ -163,7 +154,7 @@ const Navbar = () => {
     };
   }, []);
 
-  // Enhanced search function with comprehensive validation and rate limiting
+  // Simplified search function
   const handleSearch = async (query) => {
     if (!query || query.length < 2) {
       setSearchResults([]);
@@ -172,135 +163,45 @@ const Navbar = () => {
       return;
     }
     
-    // Validate and sanitize input
-    const validation = validateSearchQuery(query);
-    if (!validation.isValid) {
-      setSearchError(validation.errors[0]);
-      setSearchResults([]);
-      setIsSearchOpen(true);
-      return;
-    }
-    
-    const sanitizedQuery = validation.sanitized;
-    
-    // Check rate limiting
-    const rateLimitCheck = searchRateLimiter.canMakeRequest();
-    if (!rateLimitCheck.allowed) {
-      const remainingTime = Math.ceil(searchRateLimiter.getRemainingTime() / 1000);
-      setSearchError(`Too many searches. Please wait ${remainingTime} seconds.`);
-      setSearchResults([]);
-      setIsSearchOpen(true);
-      return;
-    }
-    
-    // Abort any ongoing search
-    if (searchAbortControllerRef.current) {
-      searchAbortControllerRef.current.abort();
-    }
-    
-    // Create new abort controller for this search
-    searchAbortControllerRef.current = new AbortController();
-    
     setIsSearching(true);
     setSearchError('');
     
     try {
-      const results = await simpleSearchRecipes(
-        sanitizedQuery, 
-        1, 
-        6,
-        { signal: searchAbortControllerRef.current.signal }
-      );
-      
-      // Check if search was aborted
-      if (searchAbortControllerRef.current?.signal.aborted) {
-        return;
-      }
-      
-      // Validate response structure
-      if (!results || typeof results !== 'object') {
-        throw new Error('Invalid search response');
-      }
+      const results = await simpleSearchRecipes(query, 1, 6);
       
       const recipes = Array.isArray(results.results) ? results.results : [];
       
-      // Validate each recipe object
-      const validatedRecipes = recipes.filter(recipe => 
-        recipe && 
-        typeof recipe === 'object' && 
-        recipe.id && 
-        recipe.title && 
-        typeof recipe.title === 'string'
-      );
-      
-      setSearchResults(validatedRecipes);
-      setLastSearchQuery(sanitizedQuery);
+      setSearchResults(recipes);
+      setLastSearchQuery(query);
       setIsSearchOpen(true);
       
-      // Add to search history if results found
-      if (validatedRecipes.length > 0) {
-        searchHistory.addSearch(sanitizedQuery);
-      }
-      
     } catch (error) {
-      // Don't show error for aborted requests
-      if (error.name === 'AbortError' || searchAbortControllerRef.current?.signal.aborted) {
-        return;
-      }
-      
       console.error('Search failed:', error);
-      
-      // Set user-friendly error messages based on error type
-      if (error.message.includes('Network Error') || error.code === 'NETWORK_ERROR') {
-        setSearchError('Network connection issue. Please check your internet.');
-      } else if (error.message.includes('timeout') || error.code === 'TIMEOUT') {
-        setSearchError('Search timed out. Please try again.');
-      } else if (error.status === 429 || error.code === 'RATE_LIMITED') {
-        setSearchError('Too many requests. Please wait a moment.');
-      } else if (error.status >= 500 || error.code === 'SERVER_ERROR') {
-        setSearchError('Server error. Please try again later.');
-      } else if (error.status === 401 || error.code === 'UNAUTHORIZED') {
-        setSearchError('Authentication required. Please sign in.');
-      } else {
-        setSearchError('Search failed. Please try again.');
-      }
-      
+      setSearchError('Search failed. Please try again.');
       setSearchResults([]);
-      setIsSearchOpen(true); // Keep open to show error
+      setIsSearchOpen(true);
       
     } finally {
       setIsSearching(false);
-      searchAbortControllerRef.current = null;
     }
   };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      // Validate and sanitize the search query before submission
-      const validation = validateSearchQuery(searchQuery.trim());
-      const sanitizedQuery = validation.sanitized || searchQuery.trim();
+      const query = searchQuery.trim();
       
       setIsSearchOpen(false);
       setSearchQuery('');
       
-      // Add to search history
-      searchHistory.addSearch(sanitizedQuery);
-      
-      navigate(`/recipes?search=${encodeURIComponent(sanitizedQuery)}`);
-      // Scroll to top of page
+      navigate(`/recipes?search=${encodeURIComponent(query)}`);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
-  // Enhanced input change handler with real-time sanitization
+  // Simple input change handler
   const handleSearchInputChange = (e) => {
-    const rawValue = e.target.value;
-    
-    // Apply basic sanitization while preserving user experience
-    const sanitized = sanitizeSearchInput(rawValue);
-    
-    setSearchQuery(sanitized);
+    setSearchQuery(e.target.value);
   };
 
   const handleSearchResultClick = (recipeId) => {

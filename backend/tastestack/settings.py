@@ -31,9 +31,19 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-72b5!06!5=+z!+5!+5!+5!+5!+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
 
-# Parse ALLOWED_HOSTS from environment
-allowed_hosts_str = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,0.0.0.0')
-ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_str.split(',')]
+# Production deployment settings
+if os.getenv('VERCEL') or os.getenv('RAILWAY') or os.getenv('RENDER') or os.getenv('PRODUCTION') or 'pythonanywhere' in os.getcwd().lower():
+    DEBUG = False
+    ALLOWED_HOSTS = ['*']
+elif not DEBUG:
+    # Production environment
+    allowed_hosts_str = os.getenv('ALLOWED_HOSTS', '')
+    ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_str.split(',') if host.strip()]
+    if not ALLOWED_HOSTS:
+        ALLOWED_HOSTS = ['*']
+else:
+    # Development environment
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
 
 
 # Application definition
@@ -146,7 +156,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Production static files settings
+if not DEBUG:
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -204,11 +219,14 @@ SIMPLE_JWT = {
 }
 
 # CORS settings - configurable via environment
-cors_origins_str = os.getenv('CORS_ALLOWED_ORIGINS', 'http://localhost:3000,http://127.0.0.1:3000,http://localhost:5173,http://127.0.0.1:5173')
-CORS_ALLOWED_ORIGINS = [origin.strip() for origin in cors_origins_str.split(',')]
-
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_ALL_ORIGINS = os.getenv('CORS_ALLOW_ALL_ORIGINS', 'True').lower() == 'true'  # Allow all origins in development
+if os.getenv('VERCEL') or os.getenv('RAILWAY') or os.getenv('RENDER') or os.getenv('PRODUCTION') or 'pythonanywhere' in os.getcwd().lower():
+    CORS_ALLOW_ALL_ORIGINS = True
+    CORS_ALLOW_CREDENTIALS = True
+else:
+    cors_origins_str = os.getenv('CORS_ALLOWED_ORIGINS', 'http://localhost:3000,http://127.0.0.1:3000,http://localhost:5173,http://127.0.0.1:5173')
+    CORS_ALLOWED_ORIGINS = [origin.strip() for origin in cors_origins_str.split(',')]
+    CORS_ALLOW_CREDENTIALS = True
+    CORS_ALLOW_ALL_ORIGINS = os.getenv('CORS_ALLOW_ALL_ORIGINS', 'True').lower() == 'true'
 
 # Add CORS debugging
 CORS_ALLOWED_HEADERS = [

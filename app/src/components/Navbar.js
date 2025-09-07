@@ -719,45 +719,88 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Auth */}
-            <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
+            <div className="px-4 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50">
               {isAuthenticated ? (
-                <div className="px-2 space-y-1">
+                <div className="space-y-3">
+                  {/* User Profile */}
+                  <div className="flex items-center px-4 py-3 bg-white dark:bg-gray-800 rounded-xl shadow-sm">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-200 to-purple-200 flex items-center justify-center mr-3">
+                      {user?.profile_picture ? (
+                        <img
+                          src={user.profile_picture.startsWith('/') 
+                            ? `${process.env.REACT_APP_MEDIA_URL || 'http://localhost:8000'}${user.profile_picture}` 
+                            : user.profile_picture}
+                          alt={user.username}
+                          className="w-full h-full object-cover rounded-full"
+                        />
+                      ) : (
+                        <span className="text-violet-600 font-semibold text-sm">
+                          {(user?.first_name?.charAt(0) || user?.username?.charAt(0) || 'U').toUpperCase()}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex-1">
+                      <div className="font-semibold text-gray-900 dark:text-gray-100">
+                        {user?.first_name || user?.username || 'User'}
+                      </div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">Welcome back!</div>
+                    </div>
+                  </div>
+                  
                   <Link 
                     to="/create-recipe" 
                     onClick={closeAllMenus}
-                    className="block px-3 py-2 rounded-lg text-base font-medium text-white bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 transition-all duration-200 shadow-md hover:shadow-lg"
+                    className="flex items-center w-full px-4 py-3 rounded-xl text-base font-semibold text-white bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
                   >
-                    ➕ Create Recipe
+                    <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+                    </svg>
+                    Create Recipe
                   </Link>
+                  
                   <Link 
                     to="/dashboard" 
                     onClick={closeAllMenus}
-                    className="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                    className="flex items-center w-full px-4 py-3 rounded-xl text-base font-medium text-gray-700 dark:text-gray-200 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-white dark:hover:bg-gray-800 transition-all duration-200"
                   >
-                    👤 Dashboard
+                    <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
+                    </svg>
+                    Dashboard
                   </Link>
+                  
                   <button 
                     onClick={handleLogout}
-                    className="block w-full text-left px-3 py-2 rounded-lg text-base font-medium text-gray-700 dark:text-gray-200 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                    className="flex items-center w-full px-4 py-3 rounded-xl text-base font-medium text-gray-700 dark:text-gray-200 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200"
                   >
-                    🚪 Sign Out
+                    <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clipRule="evenodd" />
+                    </svg>
+                    Sign Out
                   </button>
                 </div>
               ) : (
-                <div className="px-2 space-y-1">
+                <div className="space-y-3">
                   <Link 
                     to="/login" 
                     onClick={closeAllMenus}
-                    className="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                    className="flex items-center w-full px-4 py-3 rounded-xl text-base font-medium text-gray-700 dark:text-gray-200 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-white dark:hover:bg-gray-800 transition-all duration-200"
                   >
-                    🔑 Sign In
+                    <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    Sign In
                   </Link>
+                  
                   <Link 
                     to="/register" 
                     onClick={closeAllMenus}
-                    className="block px-3 py-2 rounded-lg text-base font-medium text-white bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 transition-all duration-200 mx-1 shadow-md hover:shadow-lg"
+                    className="flex items-center w-full px-4 py-3 rounded-xl text-base font-semibold text-white bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
                   >
-                    🚀 Join Free
+                    <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                    </svg>
+                    Join Free
                   </Link>
                 </div>
               )}

@@ -620,7 +620,7 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden bg-white/98 dark:bg-gray-900/98 backdrop-blur-xl border-t border-gray-200 dark:border-gray-700 shadow-xl">
+          <div className="lg:hidden fixed inset-x-0 top-16 bottom-0 bg-white dark:bg-gray-900 z-40 overflow-y-auto">
             {/* Mobile Search */}
             <div className="px-4 py-4 border-b border-gray-200 dark:border-gray-700">
               <form onSubmit={handleSearchSubmit}>
@@ -662,7 +662,7 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Navigation */}
-            <div className="px-4 py-3 space-y-2">
+            <div className="flex-1 px-4 py-6 space-y-3 overflow-y-auto">
               <Link 
                 to="/" 
                 onClick={closeAllMenus}
@@ -719,7 +719,7 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Auth */}
-            <div className="px-4 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50">
+            <div className="px-4 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 mt-auto">
               {isAuthenticated ? (
                 <div className="space-y-3">
                   {/* User Profile */}

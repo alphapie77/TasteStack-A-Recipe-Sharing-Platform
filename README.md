@@ -5,6 +5,7 @@
 [![React](https://img.shields.io/badge/React-18.3.1-blue.svg)](https://reactjs.org/)
 [![Django](https://img.shields.io/badge/Django-5.2.1-green.svg)](https://www.djangoproject.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6.2-blue.svg)](https://www.typescriptlang.org/)
+[![Frontend Status](https://img.shields.io/badge/Frontend-Live-brightgreen.svg)](https://taste-stack.vercel.app/)
 [![Backend Status](https://img.shields.io/badge/Backend-Live-brightgreen.svg)](https://shksabbir7.pythonanywhere.com/)
 [![API Status](https://img.shields.io/badge/API-Working-success.svg)](https://shksabbir7.pythonanywhere.com/api/recipes/)
 
@@ -12,10 +13,10 @@ TasteStack is a modern recipe sharing platform that allows users to discover, sh
 
 ## 🌐 Live Demo
 
+- **Frontend:** [https://taste-stack.vercel.app/](https://taste-stack.vercel.app/)
 - **Backend API:** [https://shksabbir7.pythonanywhere.com/](https://shksabbir7.pythonanywhere.com/)
 - **Admin Panel:** [https://shksabbir7.pythonanywhere.com/admin/](https://shksabbir7.pythonanywhere.com/admin/)
 - **API Documentation:** [View API Endpoints](#-api-endpoints)
-- **Frontend:** *Coming Soon - Deploy to Vercel*
 
 ## ✨ Features
 
@@ -112,6 +113,12 @@ docker\stop-postgres.bat  # Stop
 
 ## 🚀 Production Deployment
 
+### Frontend (Vercel) ✅ LIVE
+- **URL:** https://taste-stack.vercel.app/
+- **Status:** Production Ready
+- **Integration:** Connected to PythonAnywhere backend
+- **Features:** Full recipe sharing platform with authentication
+
 ### Backend (PythonAnywhere) ✅ LIVE
 - **URL:** https://shksabbir7.pythonanywhere.com/
 - **Status:** Production Ready
@@ -119,21 +126,16 @@ docker\stop-postgres.bat  # Stop
 - **Authentication:** JWT tokens working
 - **CORS:** Configured for frontend integration
 
-### Frontend (Vercel) 🔄 Coming Soon
-- **Status:** Ready for deployment
-- **Configuration:** Environment variables prepared
-- **Integration:** API endpoints tested and verified
-
 ## 🖥️ Usage
 
-1. **Access the application:** Open your web browser and go to `http://localhost:3000`
+1. **Access the application:** Open your web browser and go to [https://taste-stack.vercel.app/](https://taste-stack.vercel.app/) or `http://localhost:3000` for local development
 2. **Create an account:** Click "Register" to create a new user account
 3. **Browse recipes:** Explore recipes on the home page
 4. **Create recipes:** Click "Add Recipe" to share your own recipes
 5. **Interact:** Rate, comment, and like recipes from other users
 
 ### User Registration & Authentication
-1. Visit http://localhost:3000
+1. Visit https://taste-stack.vercel.app/ (or http://localhost:3000 for local development)
 2. Click "Get Started" or "Register"
 3. Fill in registration form with required details
 4. Login with your credentials

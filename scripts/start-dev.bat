@@ -8,7 +8,7 @@ start "TasteStack Backend" cmd /k "cd backend && venv\Scripts\activate && python
 timeout /t 3 /nobreak > nul
 
 echo Starting Frontend (React)...
-start "TasteStack Frontend" cmd /k "cd frontend && npm start"
+start "TasteStack Frontend" cmd /k "cd app && npm start"
 
 echo.
 echo ✅ Development servers starting...

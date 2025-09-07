@@ -173,8 +173,7 @@ TasteStack/
 │   ├── interactions/       # Social features (likes, comments)
 │   ├── media/              # User uploaded files
 │   └── requirements.txt    # Python dependencies
-├── 📁 app/                  # React application (Vercel-ready)
-├── 📁 frontend/             # React application (development)
+├── 📁 app/                  # React application
 │   ├── src/
 │   │   ├── components/     # Reusable UI components
 │   │   ├── pages/          # Page components
@@ -576,7 +575,7 @@ source venv/bin/activate
 python manage.py runserver
 
 # Frontend (Terminal 2)  
-cd frontend
+cd app
 npm start
 ```
 

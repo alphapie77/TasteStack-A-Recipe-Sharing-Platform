@@ -18,7 +18,7 @@ cd ..
 
 echo.
 echo 2. Setting up Frontend...
-cd frontend
+cd app
 echo Installing Node.js dependencies...
 npm install
 cd ..
@@ -28,7 +28,7 @@ echo ✅ Setup complete!
 echo.
 echo 🚀 To start the application:
 echo   Backend: cd backend && venv\Scripts\activate && python manage.py runserver
-echo   Frontend: cd frontend && npm start
+echo   Frontend: cd app && npm start
 echo.
 echo 🐳 Or use Docker:
 echo   SQLite: docker\run-sqlite.bat

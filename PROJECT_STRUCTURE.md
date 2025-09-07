@@ -41,8 +41,7 @@ TasteStack/
 │   ├── docker-entrypoint.sh      # Docker startup script
 │   └── manage.py                  # Django management
 │
-├── 📁 app/                        # React application (Vercel-ready)
-├── 📁 frontend/                   # React application (development)
+├── 📁 app/                        # React application
 │   ├── 📁 public/                 # Static assets
 │   │   ├── index.html             # Main HTML template
 │   │   ├── favicon.ico            # Site icon
@@ -129,7 +128,7 @@ TasteStack/
 - **media/**: User-uploaded files (images)
 - **static/**: CSS, JS, images served by Django
 
-### ⚛️ **Frontend Structure**
+### ⚛️ **App Structure**
 - **components/**: Reusable UI components
 - **pages/**: Full page components
 - **services/**: API communication layer
@@ -143,7 +142,7 @@ TasteStack/
 
 ### 🧪 **Testing Structure**
 - **tests/**: Organized test files
-- Separate backend and frontend test directories
+- Separate backend and app test directories
 
 ## 🎯 **Benefits of This Structure**
 

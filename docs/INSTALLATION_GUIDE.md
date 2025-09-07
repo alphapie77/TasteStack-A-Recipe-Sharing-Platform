@@ -32,7 +32,7 @@ python manage.py migrate
 python manage.py runserver
 
 # Frontend setup (new terminal)
-cd ../frontend
+cd ../app
 npm install
 npm start
 ```
@@ -191,8 +191,8 @@ python manage.py runserver
 
 #### Frontend Setup (React)
 ```bash
-# Open new terminal and navigate to frontend
-cd frontend
+# Open new terminal and navigate to app
+cd app
 
 # Install Node.js dependencies
 npm install
@@ -216,7 +216,7 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 python manage.py runserver
 
 # Terminal 2: Frontend
-cd frontend
+cd app
 npm start
 ```
 
@@ -231,7 +231,7 @@ DATABASE_URL=sqlite:///db.sqlite3
 CORS_ALLOWED_ORIGINS=http://localhost:3000
 ```
 
-**Frontend (.env.local in frontend/ directory):**
+**Frontend (.env.local in app/ directory):**
 ```env
 REACT_APP_API_BASE_URL=http://localhost:8000/api
 REACT_APP_ENV=development
@@ -305,7 +305,7 @@ max_requests_jitter = 100
 
 ### 3. Frontend Production Build
 ```bash
-cd frontend
+cd app
 
 # Create production build
 npm run build
@@ -331,7 +331,7 @@ server {
 
     # Frontend
     location / {
-        root /var/www/tastestack/frontend/build;
+        root /var/www/tastestack/app/build;
         try_files $uri $uri/ /index.html;
     }
 

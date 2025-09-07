@@ -620,191 +620,107 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden fixed inset-x-0 top-16 bottom-0 bg-white dark:bg-gray-900 z-40 overflow-y-auto">
-            {/* Mobile Search */}
-            <div className="px-4 py-4 border-b border-gray-200 dark:border-gray-700">
-              <form onSubmit={handleSearchSubmit}>
-                <div className="relative">
-                  <input
-                    type="text"
-                    placeholder="🔍 Search recipes, ingredients..."
-                    value={searchQuery}
-                    onChange={handleSearchInputChange}
-                    className="block w-full pl-12 pr-10 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 dark:focus:ring-violet-400 dark:focus:border-violet-400 shadow-sm"
-                    maxLength={100}
-                    autoComplete="off"
-                  />
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    {isSearching ? (
-                      <div className="animate-spin rounded-full h-4 w-4 border-2 border-violet-400 border-t-transparent"></div>
-                    ) : (
-                      <svg className="h-5 w-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor">
+          <div className="lg:hidden">
+            <div className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-lg">
+              {/* Mobile Search */}
+              <div className="px-4 py-4 border-b border-gray-200 dark:border-gray-700">
+                <form onSubmit={handleSearchSubmit}>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="🔍 Search recipes..."
+                      value={searchQuery}
+                      onChange={handleSearchInputChange}
+                      className="block w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
+                      maxLength={100}
+                      autoComplete="off"
+                    />
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                       </svg>
-                    )}
+                    </div>
                   </div>
-                  {searchQuery && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setSearchQuery('');
-                        setSearchResults([]);
-                      }}
-                      className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
-                    >
-                      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </button>
-                  )}
-                </div>
-              </form>
-            </div>
-
-            {/* Mobile Navigation */}
-            <div className="flex-1 px-4 py-6 space-y-3 overflow-y-auto">
-              <Link 
-                to="/" 
-                onClick={closeAllMenus}
-                className="flex items-center px-4 py-3 rounded-xl text-base font-medium text-gray-700 dark:text-gray-200 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-violet-50 dark:hover:bg-violet-900/20 transition-all duration-200"
-              >
-                <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-                </svg>
-                Home
-              </Link>
-              
-              <Link 
-                to="/recipes" 
-                onClick={closeAllMenus}
-                className="flex items-center px-4 py-3 rounded-xl text-base font-medium text-gray-700 dark:text-gray-200 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-violet-50 dark:hover:bg-violet-900/20 transition-all duration-200"
-              >
-                <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
-                </svg>
-                Browse Recipes
-              </Link>
-              
-              {/* Quick Categories */}
-              <div className="pt-2">
-                <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3 px-4">
-                  Quick Categories
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                  {allCategories.slice(0, 6).map((category) => (
-                    <button
-                      key={category.slug}
-                      onClick={() => handleCategoryClick(category.slug)}
-                      className="flex items-center p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-left group"
-                    >
-                      <span className="text-xl mr-3">{category.icon}</span>
-                      <span className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover:text-violet-600 dark:group-hover:text-violet-400">
-                        {category.name}
-                      </span>
-                    </button>
-                  ))}
-                </div>
+                </form>
               </div>
 
-              <Link 
-                to="/about" 
-                onClick={closeAllMenus}
-                className="flex items-center px-4 py-3 rounded-xl text-base font-medium text-gray-700 dark:text-gray-200 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-violet-50 dark:hover:bg-violet-900/20 transition-all duration-200"
-              >
-                <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                </svg>
-                About
-              </Link>
+              {/* Mobile Navigation */}
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                <Link 
+                  to="/" 
+                  onClick={closeAllMenus}
+                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800"
+                >
+                  🏠 Home
+                </Link>
+                
+                <Link 
+                  to="/recipes" 
+                  onClick={closeAllMenus}
+                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800"
+                >
+                  🔍 Browse Recipes
+                </Link>
+                
+                <Link 
+                  to="/about" 
+                  onClick={closeAllMenus}
+                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800"
+                >
+                  ℹ️ About
+                </Link>
             </div>
 
-            {/* Mobile Auth */}
-            <div className="px-4 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 mt-auto">
-              {isAuthenticated ? (
-                <div className="space-y-3">
-                  {/* User Profile */}
-                  <div className="flex items-center px-4 py-3 bg-white dark:bg-gray-800 rounded-xl shadow-sm">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-200 to-purple-200 flex items-center justify-center mr-3">
-                      {user?.profile_picture ? (
-                        <img
-                          src={user.profile_picture.startsWith('/') 
-                            ? `${process.env.REACT_APP_MEDIA_URL || 'http://localhost:8000'}${user.profile_picture}` 
-                            : user.profile_picture}
-                          alt={user.username}
-                          className="w-full h-full object-cover rounded-full"
-                        />
-                      ) : (
-                        <span className="text-violet-600 font-semibold text-sm">
-                          {(user?.first_name?.charAt(0) || user?.username?.charAt(0) || 'U').toUpperCase()}
-                        </span>
-                      )}
-                    </div>
-                    <div className="flex-1">
-                      <div className="font-semibold text-gray-900 dark:text-gray-100">
-                        {user?.first_name || user?.username || 'User'}
-                      </div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">Welcome back!</div>
-                    </div>
+              </div>
+              
+              {/* Mobile Auth */}
+              <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
+                {isAuthenticated ? (
+                  <div className="px-2 space-y-1">
+                    <Link 
+                      to="/create-recipe" 
+                      onClick={closeAllMenus}
+                      className="block px-3 py-2 rounded-md text-base font-medium text-white bg-violet-600 hover:bg-violet-700"
+                    >
+                      ➕ Create Recipe
+                    </Link>
+                    <Link 
+                      to="/dashboard" 
+                      onClick={closeAllMenus}
+                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800"
+                    >
+                      👤 Dashboard
+                    </Link>
+                    <button 
+                      onClick={handleLogout}
+                      className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20"
+                    >
+                      🚪 Sign Out
+                    </button>
                   </div>
-                  
-                  <Link 
-                    to="/create-recipe" 
-                    onClick={closeAllMenus}
-                    className="flex items-center w-full px-4 py-3 rounded-xl text-base font-semibold text-white bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
-                  >
-                    <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-                    </svg>
-                    Create Recipe
-                  </Link>
-                  
-                  <Link 
-                    to="/dashboard" 
-                    onClick={closeAllMenus}
-                    className="flex items-center w-full px-4 py-3 rounded-xl text-base font-medium text-gray-700 dark:text-gray-200 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-white dark:hover:bg-gray-800 transition-all duration-200"
-                  >
-                    <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
-                    </svg>
-                    Dashboard
-                  </Link>
-                  
-                  <button 
-                    onClick={handleLogout}
-                    className="flex items-center w-full px-4 py-3 rounded-xl text-base font-medium text-gray-700 dark:text-gray-200 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200"
-                  >
-                    <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clipRule="evenodd" />
-                    </svg>
-                    Sign Out
-                  </button>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  <Link 
-                    to="/login" 
-                    onClick={closeAllMenus}
-                    className="flex items-center w-full px-4 py-3 rounded-xl text-base font-medium text-gray-700 dark:text-gray-200 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-white dark:hover:bg-gray-800 transition-all duration-200"
-                  >
-                    <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                    Sign In
-                  </Link>
-                  
-                  <Link 
-                    to="/register" 
-                    onClick={closeAllMenus}
-                    className="flex items-center w-full px-4 py-3 rounded-xl text-base font-semibold text-white bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
-                  >
-                    <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-                    </svg>
-                    Join Free
-                  </Link>
-                </div>
-              )}
+                ) : (
+                  <div className="px-2 space-y-1">
+                    <Link 
+                      to="/login" 
+                      onClick={closeAllMenus}
+                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800"
+                    >
+                      🔑 Sign In
+                    </Link>
+                    <Link 
+                      to="/register" 
+                      onClick={closeAllMenus}
+                      className="block px-3 py-2 rounded-md text-base font-medium text-white bg-violet-600 hover:bg-violet-700"
+                    >
+                      🚀 Join Free
+                    </Link>
+                  </div>
+                )}
+              </div>
             </div>
+          </div>
+        )}
+
           </div>
         )}
       </nav>

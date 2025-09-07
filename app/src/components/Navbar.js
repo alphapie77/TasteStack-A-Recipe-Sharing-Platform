@@ -669,8 +669,6 @@ const Navbar = () => {
                 >
                   ℹ️ About
                 </Link>
-            </div>
-
               </div>
               
               {/* Mobile Auth */}
@@ -718,9 +716,6 @@ const Navbar = () => {
                 )}
               </div>
             </div>
-          </div>
-        )}
-
           </div>
         )}
       </nav>

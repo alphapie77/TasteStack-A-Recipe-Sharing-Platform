@@ -18,6 +18,28 @@ TasteStack is a modern recipe sharing platform that allows users to discover, sh
 - **Admin Panel:** [https://shksabbir7.pythonanywhere.com/admin/](https://shksabbir7.pythonanywhere.com/admin/)
 - **API Documentation:** [View API Endpoints](#-api-endpoints)
 
+## 📸 Screenshots
+
+### Homepage
+![Homepage](screenshots/homepage.png)
+*Modern landing page with featured recipes and statistics*
+
+### Recipe Discovery
+![Recipe Browse](screenshots/recipes.png)
+*Browse and search through recipes with advanced filters*
+
+### Recipe Details
+![Recipe Details](screenshots/recipe-detail.png)
+*Detailed recipe view with ratings, comments, and ingredients*
+
+### User Dashboard
+![Dashboard](screenshots/dashboard.png)
+*Personal dashboard with statistics and recipe management*
+
+### Mobile Responsive
+![Mobile View](screenshots/mobile.png)
+*Fully responsive design works perfectly on all devices*
+
 ## ✨ Features
 
 - 🔍 **Recipe Discovery**: Browse and search through a vast collection of recipes

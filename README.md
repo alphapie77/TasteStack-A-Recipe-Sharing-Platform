@@ -29,7 +29,7 @@ TasteStack is a modern recipe sharing platform that allows users to discover, sh
 *Browse and search through recipes with advanced filters*
 
 ### Recipe Details
-![Recipe Details](screenshots/recipe-detail.gif)
+<img src="screenshots/recipe-detail.gif" alt="Recipe Details" width="800">
 *Detailed recipe view with ratings, comments, and ingredients*
 
 ### User Dashboard
@@ -37,7 +37,7 @@ TasteStack is a modern recipe sharing platform that allows users to discover, sh
 *Personal dashboard with statistics and recipe management*
 
 ### Mobile Responsive
-![Mobile View](screenshots/mobile.gif)
+<img src="screenshots/mobile.gif" alt="Mobile View" width="400">
 *Fully responsive design works perfectly on all devices*
 
 ## ✨ Features

@@ -85,7 +85,7 @@ const HomePage = () => {
                       {user?.profile_picture ? (
                         <img
                           src={user.profile_picture.startsWith('/') 
-                            ? `http://localhost:8000${user.profile_picture}` 
+                            ? `${process.env.REACT_APP_MEDIA_URL || 'http://localhost:8000'}${user.profile_picture}` 
                             : user.profile_picture}
                           alt={user.username}
                           className="w-full h-full object-contain rounded-full bg-white"

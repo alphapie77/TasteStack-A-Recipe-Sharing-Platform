@@ -29,7 +29,7 @@ TasteStack is a modern recipe sharing platform that allows users to discover, sh
 *Browse and search through recipes with advanced filters*
 
 ### Recipe Details
-<img src="screenshots/recipe-detail.gif" alt="Recipe Details" width="800">
+<img src="screenshots/recipe-details.gif" alt="Recipe Details" width="800">
 *Detailed recipe view with ratings, comments, and ingredients*
 
 ### User Dashboard

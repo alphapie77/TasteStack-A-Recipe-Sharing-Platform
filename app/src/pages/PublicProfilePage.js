@@ -23,7 +23,7 @@ const PublicProfilePage = () => {
           headers.Authorization = `Bearer ${token}`;
         }
         
-        const response = await fetch(`http://localhost:8000/api/auth/profile/${userId}/`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/profile/${userId}/`, {
           headers
         });
         
@@ -54,7 +54,7 @@ const PublicProfilePage = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8000/api/auth/follow/${userId}/`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/follow/${userId}/`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -128,7 +128,7 @@ const PublicProfilePage = () => {
                     {profile.user.profile_picture ? (
                       <img
                         src={profile.user.profile_picture.startsWith('/') 
-                          ? `http://localhost:8000${profile.user.profile_picture}` 
+                          ? `${process.env.REACT_APP_MEDIA_URL}${profile.user.profile_picture}` 
                           : profile.user.profile_picture}
                         alt="Profile"
                         className="w-full h-full object-contain rounded-full bg-gray-100"

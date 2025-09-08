@@ -353,7 +353,11 @@ def forgot_password(request):
         # Encode token to handle special characters in URL
         import urllib.parse
         encoded_token = urllib.parse.quote(token, safe='')
-        reset_url = f"http://localhost:3000/reset-password/{user.pk}/{encoded_token}/"
+        
+        # Use environment variable for frontend URL or fallback to localhost
+        import os
+        frontend_url = os.getenv('FRONTEND_URL', 'http://localhost:3000')
+        reset_url = f"{frontend_url}/reset-password/{user.pk}/{encoded_token}/"
         
         return Response({
             'message': 'Password reset email sent',

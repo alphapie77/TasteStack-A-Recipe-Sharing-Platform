@@ -56,11 +56,16 @@ const ForgotPasswordPage = () => {
                 We've sent a password reset link to <strong>{email}</strong>
               </p>
               {resetLink && (
-                <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-xl">
+                <div className="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl">
                   <p className="text-sm text-yellow-800 dark:text-yellow-200 mb-2">Development Mode - Use this link:</p>
                   <a href={resetLink} className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm break-all">
                     {resetLink}
                   </a>
+                </div>
+              )}
+              {!resetLink && (
+                <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl">
+                  <p className="text-sm text-blue-800 dark:text-blue-200">Check your email for the reset link, or contact support if you don't receive it.</p>
                 </div>
               )}
               <Link

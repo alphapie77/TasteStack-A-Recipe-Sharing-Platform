@@ -359,6 +359,7 @@ def forgot_password(request):
         frontend_url = os.getenv('FRONTEND_URL', 'http://localhost:3000')
         reset_url = f"{frontend_url}/reset-password/{user.pk}/{encoded_token}/"
         
+        print(f"Generated reset URL: {reset_url}")  # Debug log
         return Response({
             'message': 'Password reset email sent',
             'reset_link': reset_url  # Only for development
